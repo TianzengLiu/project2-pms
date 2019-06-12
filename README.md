@@ -4,24 +4,49 @@ Software for managing a large parking complex.
 
 Features:
 
+1 2 3 4 5
+
 Users:
-- Sign-up for the site
-- Log-in
-- Apply for permit
-- Manage Information
-- View and print permit
+- Sign-up for the site - 3
+- hashing
+- license info
+
+- Log-in - 2
+- {username, password}
+- hashing involved
+
+- Apply for permit - 3
+- financial info & authentication
+- signature & document
+- link license info
+
+- Manage Information - 4
+
+- View and print permit - 4
+- format info
+- location, name, expiry, logo
 
 Managers:
-- Sign-up
-- Log-in
-- See all users
-- Edit user information
-- See all permits
-- Edit permit information
-- View spaces, free and assigned
-- Report abuse of system
+- Sign-up - 3
 
-Password hashing
-JWT
+- Log-in - 2
+
+- See all users - 2
+
+- Edit user information - 3
+
+- See all permits - 2
+
+- Edit permit information - 4
+
+- View spaces, free and assigned - 5
+
+- Report abuse of system - 3
+- log license plate
+
+General features:
+- Password hashing
+- JWT
+
 Stretch goals:
 - Map of spaces
