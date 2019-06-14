@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,9 +30,11 @@ public class User {
 	
 	private String address;
 	
-	private int roleId;
+	@ManyToOne
+	private Role role;
 	
-	private int permitId;
+	@OneToOne
+	private Permit permit;
 
 	public User() {
 		super();
@@ -38,7 +42,7 @@ public class User {
 	}
 
 	public User(int userId, String username, String password, String firstName, String lastName, String email,
-			String address, int roleId, int permitId) {
+			String address, Role role, Permit permit) {
 		super();
 		this.userId = userId;
 		this.username = username;
@@ -47,8 +51,8 @@ public class User {
 		this.lastName = lastName;
 		this.email = email;
 		this.address = address;
-		this.roleId = roleId;
-		this.permitId = permitId;
+		this.role = role;
+		this.permit = permit;
 	}
 
 	public int getUserId() {
@@ -107,27 +111,27 @@ public class User {
 		this.address = address;
 	}
 
-	public int getRoleId() {
-		return roleId;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
-	public int getPermitId() {
-		return permitId;
+	public Permit getPermit() {
+		return permit;
 	}
 
-	public void setPermitId(int permitId) {
-		this.permitId = permitId;
+	public void setPermit(Permit permit) {
+		this.permit = permit;
 	}
 
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", email=" + email + ", address=" + address + ", roleId="
-				+ roleId + ", permitId=" + permitId + "]";
+				+ firstName + ", lastName=" + lastName + ", email=" + email + ", address=" + address + ", role=" + role
+				+ ", permit=" + permit + "]";
 	}
 
 	@Override
@@ -139,8 +143,8 @@ public class User {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + permitId;
-		result = prime * result + roleId;
+		result = prime * result + ((permit == null) ? 0 : permit.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + userId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -180,9 +184,15 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (permitId != other.permitId)
+		if (permit == null) {
+			if (other.permit != null)
+				return false;
+		} else if (!permit.equals(other.permit))
 			return false;
-		if (roleId != other.roleId)
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
 			return false;
 		if (userId != other.userId)
 			return false;
