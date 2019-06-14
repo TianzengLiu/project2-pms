@@ -1,10 +1,13 @@
 package com.champions.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -30,10 +33,12 @@ public class User {
 	
 	private String address;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(referencedColumnName="role_id")
 	private Role role;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(referencedColumnName="permit_id")
 	private Permit permit;
 
 	public User() {
