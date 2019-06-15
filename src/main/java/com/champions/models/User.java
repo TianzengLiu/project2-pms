@@ -23,7 +23,8 @@ public class User {
 	
 	private String username;
 	
-	private String passwd;
+	@Column(name="passwd")
+	private String password;
 	
 	private String firstName;
 	
@@ -34,11 +35,11 @@ public class User {
 	private String address;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(referencedColumnName="role_id")
+	@JoinColumn(name="role_id", referencedColumnName="role_id")
 	private Role role;
 	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(referencedColumnName="permit_id")
+	@JoinColumn(name="permit_id", referencedColumnName="permit_id", nullable=true)
 	private Permit permit;
 
 	public User() {
@@ -46,12 +47,12 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userId, String username, String passwd, String firstName, String lastName, String email,
+	public User(int userId, String username, String password, String firstName, String lastName, String email,
 			String address, Role role, Permit permit) {
 		super();
 		this.userId = userId;
 		this.username = username;
-		this.passwd = passwd;
+		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -76,12 +77,12 @@ public class User {
 		this.username = username;
 	}
 
-	public String getPasswd() {
-		return passwd;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getFirstName() {
@@ -134,7 +135,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", passwd=" + passwd + ", firstName="
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", email=" + email + ", address=" + address + ", role=" + role
 				+ ", permit=" + permit + "]";
 	}
@@ -147,7 +148,7 @@ public class User {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((passwd == null) ? 0 : passwd.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((permit == null) ? 0 : permit.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + userId;
@@ -184,10 +185,10 @@ public class User {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
-		if (passwd == null) {
-			if (other.passwd != null)
+		if (password == null) {
+			if (other.password != null)
 				return false;
-		} else if (!passwd.equals(other.passwd))
+		} else if (!password.equals(other.password))
 			return false;
 		if (permit == null) {
 			if (other.permit != null)
@@ -208,5 +209,4 @@ public class User {
 			return false;
 		return true;
 	}
-	
 }
