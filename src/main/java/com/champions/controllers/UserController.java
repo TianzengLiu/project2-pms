@@ -28,21 +28,25 @@ public class UserController {
 
 	@Autowired
 	public UserController(UserService userService) {
+		
 		this.userService = userService;
 	}
 	
 	@GetMapping
 	public List<User> findAll() {
+		
 		return userService.findAll();
 	}
 	
 	@GetMapping("username/{username}")
 	public List<User> findByUsername(@PathVariable String username) {
+		
 		return userService.findByUsername(username);
 	}
 	
 	@PostMapping
 	public User saveUser(@Valid @RequestBody User user) {
+		
 		return userService.save(user);
 	}
 	
