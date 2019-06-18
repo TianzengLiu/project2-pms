@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.champions.annotations.Authen;
 import com.champions.models.User;
 import com.champions.services.UserService;
+
 
 @RestController
 @RequestMapping("user")
@@ -31,7 +33,7 @@ public class UserController {
 		
 		this.userService = userService;
 	}
-	
+	@Authen(roles = { "manager", "admin" })
 	@GetMapping
 	public List<User> findAll() {
 		
