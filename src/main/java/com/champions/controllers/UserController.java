@@ -1,15 +1,19 @@
 package com.champions.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.champions.models.User;
@@ -50,4 +54,14 @@ public class UserController {
 		return userService.save(user);
 	}
 	
+	@RequestMapping(value = "{id}", 
+					method = RequestMethod.PATCH, 
+					consumes = MediaType.APPLICATION_JSON_VALUE)
+	public User partialUpdateGeneric(
+			@RequestBody Map<String, Object> updates, @PathVariable("id") String id) {
+	    
+	    return userService.update(updates, Integer.parseInt(id));
+	}
+
+
 }
