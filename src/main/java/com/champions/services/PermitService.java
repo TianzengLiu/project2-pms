@@ -8,6 +8,8 @@ public interface PermitService {
 
 	public List<Permit> findAll();
 	
+	public Permit findById(Integer id);
+	
 	public List<Permit> findByParkingSpot(String parkingSpot);
 	
 	public List<Permit> findByVehicleLicense(String vehicleLicense);
