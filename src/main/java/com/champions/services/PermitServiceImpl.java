@@ -1,6 +1,7 @@
 package com.champions.services;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,22 @@ public class PermitServiceImpl implements PermitService {
 	public List<Permit> findAll() {
 		
 		return permitDao.findAll();
+	}
+	
+	@Override
+	public Permit findById(Integer id) {
+		
+		Permit permit = null;
+		
+		try {
+			permit = permitDao.findById(id).get();
+			
+		} catch(NoSuchElementException e) {
+			
+			System.out.println("No Permit of ID " + id + " found");
+		}
+		
+		return permit;
 	}
 
 	@Override
