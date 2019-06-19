@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.champions.models.Credentials;
 import com.champions.models.User;
 import com.champions.repositories.UserDao;
 
@@ -36,12 +35,6 @@ public class UserServiceImpl implements UserService {
 	public User save(User user) {
 		
 		return userDao.save(user);
-	}
-
-	@Override
-	public User login(Credentials cred) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
