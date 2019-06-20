@@ -5,8 +5,10 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.champions.exceptions.PermitNotFoundException;
 import com.champions.models.Permit;
 import com.champions.models.User;
 import com.champions.repositories.PermitDao;
@@ -38,7 +40,8 @@ public class PermitServiceImpl implements PermitService {
 			
 		} catch(NoSuchElementException e) {
 			
-			System.out.println("No Permit of ID " + id + " found");
+			String err = "PermitService failed to find permit of ID " + id;
+			throw new PermitNotFoundException(HttpStatus.NOT_FOUND, err);
 		}
 		
 		return permit;
@@ -47,13 +50,29 @@ public class PermitServiceImpl implements PermitService {
 	@Override
 	public List<Permit> findByParkingSpot(String parkingSpot) {
 		
-		return permitDao.findByParkingSpot(parkingSpot);
+		List<Permit> permits = permitDao.findByParkingSpot(parkingSpot);
+		
+		if(permits.isEmpty()) {
+			
+			String err = "PermitService found no permits for parking spot " + parkingSpot;
+			throw new PermitNotFoundException(HttpStatus.NOT_FOUND, err);
+		}
+		
+		return permits;
 	}
 
 	@Override
 	public List<Permit> findByVehicleLicense(String vehicleLicense) {
+
+		List<Permit> permits = permitDao.findByVehicleLicense(vehicleLicense);
 		
-		return permitDao.findByVehicleLicense(vehicleLicense);
+		if(permits.isEmpty()) {
+			
+			String err = "PermitService found no permits for license " + vehicleLicense;
+			throw new PermitNotFoundException(HttpStatus.NOT_FOUND, err);
+		}
+		
+		return permits;
 	}
 
 	@Override
@@ -81,7 +100,8 @@ public class PermitServiceImpl implements PermitService {
 					
 		} catch(NoSuchElementException e) {
 					
-			System.out.println("PermitService update method failed to find permit of ID " + id);
+			String err = "PermitService update method failed to find permit of ID " + id;
+			throw new PermitNotFoundException(HttpStatus.NOT_FOUND, err);
 		}
 				
 		if(permit != null) {
