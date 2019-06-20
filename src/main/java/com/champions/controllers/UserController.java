@@ -2,6 +2,7 @@ package com.champions.controllers;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -46,6 +47,12 @@ public class UserController {
 	public List<User> findByUsername(@PathVariable String username) {
 		
 		return userService.findByUsername(username);
+	}
+	
+	@GetMapping("userId/{userId}")
+	public User findById(@PathVariable int userId) {
+		
+		return userService.findById(userId);
 	}
 	
 	@PostMapping
