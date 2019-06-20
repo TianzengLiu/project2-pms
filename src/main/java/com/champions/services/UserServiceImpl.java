@@ -48,6 +48,12 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	public void delete(Integer id) {
+		
+		userDao.deleteById(id);
+	}
+	
+	@Override
 	public User update(Map<String, Object> updates, int id) {
 		
 		// test output

@@ -13,5 +13,7 @@ public interface UserService {
 	
 	public User save(User user);
 	
+	public void delete(Integer id);
+	
 	public User update(Map<String, Object> updates, int id);
 }
