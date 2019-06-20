@@ -7,6 +7,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,6 +60,13 @@ public class PermitController {
 	public Permit savePermit(@Valid @RequestBody Permit permit) {
 		
 		return permitService.save(permit);
+	}
+	
+	@DeleteMapping("{id}")
+	public ResponseEntity<?> delete(@PathVariable String id) {
+		
+		permitService.delete(Integer.parseInt(id));
+		return ResponseEntity.ok("Permit of id " + id + " deleted");
 	}
 	
 	@RequestMapping(value = "{id}", 

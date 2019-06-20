@@ -61,6 +61,12 @@ public class PermitServiceImpl implements PermitService {
 
 		return permitDao.save(permit);
 	}
+	
+	@Override 
+	public void delete(Integer id) {
+		
+		permitDao.deleteById(id);
+	}
 
 	@Override
 	public Permit update(Map<String, Object> updates, int id) {

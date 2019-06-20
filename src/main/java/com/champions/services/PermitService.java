@@ -17,5 +17,7 @@ public interface PermitService {
 	
 	public Permit save(Permit permit);
 	
+	public void delete(Integer id);
+	
 	public Permit update(Map<String, Object> updates, int id);
 }
