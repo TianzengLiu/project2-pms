@@ -40,6 +40,23 @@ public class UserServiceImpl implements UserService {
 		
 		return userDao.findByUsername(username);
 	}
+	
+	@Override
+	public User findById(int userId) {
+		
+		User user = null;
+		
+		try {
+			user = userDao.findById(userId).get();
+			
+		} catch(NoSuchElementException e) {
+			
+			System.out.println("UserService update method failed to find user of ID " + userId);
+		}
+		
+		return user;
+		
+	}
 
 	@Override
 	public User save(User user) {
