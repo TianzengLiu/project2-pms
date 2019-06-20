@@ -137,7 +137,8 @@ public class UserServiceImpl implements UserService {
 			
 		} catch(NoSuchElementException e) {
 			
-			System.out.println("UserService update method failed to find user of ID " + id);
+			String err = "UserService update method failed to find user of ID " + id;
+			throw new UserNotFoundException(HttpStatus.NOT_FOUND, err);
 		}
 		
 		if(user != null) {

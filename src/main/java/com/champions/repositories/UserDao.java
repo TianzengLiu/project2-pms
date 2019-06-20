@@ -13,7 +13,4 @@ public interface UserDao extends JpaRepository<User, Integer> {
 
 	public List<User> findByEmail(String email);
 	
-//	public Optional<User> findByUserId(int userId);
-	
-	//TODO: constraint-based queries
 }
