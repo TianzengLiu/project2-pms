@@ -18,13 +18,6 @@ public class ApiExceptionHandler {
 		return new ResponseEntity<Object> (e.getMessage(), e.getStatus());
 	}
 	
-	@ExceptionHandler(value = {UnauthorizedException.class})
-	public ResponseEntity<Object> unauthorizedUser(UnauthorizedException e) {
-		System.out.println(e);
-		
-    	return new ResponseEntity<Object>(e.getMessage(), e.getStatus());
-	}
-	
 	@ExceptionHandler(value = {Throwable.class}) 
 	public ResponseEntity<Object> catchAll(Throwable e) {
 		System.out.println(e);
