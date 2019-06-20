@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.champions.exceptions.RoleNotFoundException;
 import com.champions.models.Role;
 import com.champions.repositories.RoleDao;
 
@@ -36,7 +38,8 @@ public class RoleServiceImpl implements RoleService {
 		
 		} catch(NoSuchElementException e) {
 			
-			System.out.println("No Role of ID " + id + " found");
+			String err = "RoleService failed to find role of ID " + id;
+			throw new RoleNotFoundException(HttpStatus.NOT_FOUND, err);
 		}
 		
 		return role;
@@ -45,7 +48,15 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public Role findByRoleName(String name) {
 		
-		return roleDao.findByRoleName(name);
+		Role role = roleDao.findByRoleName(name);
+		
+		if(role == null) {
+			
+			String err = "RoleService failed to find role of name " + name;
+			throw new RoleNotFoundException(HttpStatus.NOT_FOUND, err);
+		}
+		
+		return role;
 	}
 
 }

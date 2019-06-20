@@ -3,7 +3,6 @@ package com.champions.services;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import com.champions.exceptions.UserNotFoundException;
 import com.champions.models.Permit;
 import com.champions.models.Role;
 import com.champions.models.User;
-import com.champions.repositories.RoleDao;
 import com.champions.repositories.UserDao;
 
 @Service
