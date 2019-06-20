@@ -57,7 +57,7 @@ public class UserController {
 	@RequestMapping(value = "{id}", 
 					method = RequestMethod.PATCH, 
 					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public User partialUpdateGeneric(
+	public User partialUpdate(
 			@RequestBody Map<String, Object> updates, @PathVariable("id") String id) {
 	    
 	    return userService.update(updates, Integer.parseInt(id));

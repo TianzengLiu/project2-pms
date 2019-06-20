@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 	public User update(Map<String, Object> updates, int id) {
 		
 		// test output
-		updates.forEach((s, o) -> {System.out.println(s + " " + o + " " + o.getClass());});
+		//updates.forEach((s, o) -> {System.out.println(s + " " + o + " " + o.getClass());});
 		
 		User user = null;
 		
