@@ -34,11 +34,11 @@ public class User {
 	
 	private String address;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="role_id", referencedColumnName="role_id")
 	private Role role;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="permit_id", referencedColumnName="permit_id", nullable=true)
 	private Permit permit;
 
