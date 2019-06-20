@@ -2,7 +2,8 @@ package com.champions.exceptions;
 
 import org.springframework.http.HttpStatus;
 
-public abstract class AbstractApiException extends RuntimeException{
+public abstract class AbstractApiException extends RuntimeException {
+	
 	HttpStatus status;
 	String message;
 	
