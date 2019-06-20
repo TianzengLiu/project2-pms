@@ -12,6 +12,8 @@ public interface UserService {
 	
 	public List<User> findByUsername(String username);
 	
+	public User save(Map<String, Object> user);
+	
 	public User save(User user);
 	
 	public void delete(Integer id);

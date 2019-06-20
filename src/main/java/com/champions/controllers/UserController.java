@@ -56,10 +56,10 @@ public class UserController {
 		return userService.findById(userId);
 	}
 	
-	@PostMapping
-	public User saveUser(@Valid @RequestBody User user) {
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	public User saveUser(@RequestBody Map<String, Object> newUser) {
 		
-		return userService.save(user);
+		return userService.save(newUser);
 	}
 	
 	@DeleteMapping("{id}")

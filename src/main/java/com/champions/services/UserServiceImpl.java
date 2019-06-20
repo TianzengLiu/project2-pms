@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,48 @@ public class UserServiceImpl implements UserService {
 	public User save(User user) {
 		
 		return userDao.save(user);
+	}
+	
+	@Override
+	public User save(Map<String, Object> newUser) {
+		
+		User user = null;
+		
+		if(validNewUser(newUser)) {
+			
+			user = unpackNewUser(newUser);
+			userDao.save(user);
+		}
+		
+		return user;
+	}
+	
+	private boolean validNewUser(Map<String, Object> user) {
+		
+		Set<String> keys = user.keySet();
+		
+		boolean valid = keys.contains("username") && 
+						keys.contains("password") &&
+						keys.contains("email") &&
+						keys.contains("firstName") && 
+						keys.contains("lastName") &&
+						keys.contains("address");
+		
+		return valid;
+	}
+	
+	private User unpackNewUser(Map<String, Object> newUser) {
+		
+		String username = (String)newUser.get("username");
+		String password = (String)newUser.get("password");
+		String first = (String)newUser.get("firstName");
+		String last = (String)newUser.get("lastName");
+		String email = (String)newUser.get("email");
+		String address = (String)newUser.get("address");
+		
+		Role role = roleService.findById((Integer)newUser.get("roleId"));
+		
+		return new User(0, username, password, first, last, email, address, role, null);
 	}
 	
 	@Override
