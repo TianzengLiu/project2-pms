@@ -10,7 +10,7 @@ public interface UserService {
 
 	public List<User> findAll();
 	
-	public List<User> findByUsername(String username);
+	public User findByUsername(String username);
 	
 	public User save(Map<String, Object> user);
 	

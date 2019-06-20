@@ -7,8 +7,10 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.champions.exceptions.UserNotFoundException;
 import com.champions.models.Permit;
 import com.champions.models.Role;
 import com.champions.models.User;
@@ -37,9 +39,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> findByUsername(String username) {
+	public User findByUsername(String username) {
 		
-		return userDao.findByUsername(username);
+		User user = userDao.findByUsername(username);
+		
+		if(user == null) {
+			
+			String err = "UserService failed to find user of username " + username;
+			throw new UserNotFoundException(HttpStatus.NOT_FOUND, err);
+		}
+		
+		return user;
 	}
 	
 	@Override
@@ -52,7 +62,8 @@ public class UserServiceImpl implements UserService {
 			
 		} catch(NoSuchElementException e) {
 			
-			System.out.println("UserService update method failed to find user of ID " + userId);
+			String err = "UserService failed to find user of ID " + userId;
+			throw new UserNotFoundException(HttpStatus.NOT_FOUND, err);
 		}
 		
 		return user;

@@ -5,13 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.champions.exceptions.EntityNotFoundException;
+import com.champions.exceptions.UserNotFoundException;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
 	
-	@ExceptionHandler(value = {EntityNotFoundException.class})
-	public ResponseEntity<Object> userIdNotFound (EntityNotFoundException e) {
+	@ExceptionHandler(value = {UserNotFoundException.class})
+	public ResponseEntity<Object> userIdNotFound (UserNotFoundException e) {
 		
 		System.out.println(e);
 		

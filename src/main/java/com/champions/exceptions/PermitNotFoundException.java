@@ -2,14 +2,14 @@ package com.champions.exceptions;
 
 import org.springframework.http.HttpStatus;
 
-public class EntityNotFoundException extends AbstractApiException {
+public class PermitNotFoundException extends AbstractApiException {
 
-	public EntityNotFoundException(HttpStatus hs) {
+	public PermitNotFoundException(HttpStatus hs) {
 		super(hs);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public EntityNotFoundException(HttpStatus hs, String message) {
+	public PermitNotFoundException(HttpStatus hs, String message) {
 		super(hs, message);
 		// TODO Auto-generated constructor stub
 	}
