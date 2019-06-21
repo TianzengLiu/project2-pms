@@ -6,7 +6,6 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.champions.exceptions.UserNotFoundException;
@@ -45,7 +44,7 @@ public class UserServiceImpl implements UserService {
 		if(user == null) {
 			
 			String err = "UserService failed to find user of username " + username;
-			throw new UserNotFoundException(HttpStatus.NOT_FOUND, err);
+			throw new UserNotFoundException(err);
 		}
 		
 		return user;
@@ -62,7 +61,7 @@ public class UserServiceImpl implements UserService {
 		} catch(NoSuchElementException e) {
 			
 			String err = "UserService failed to find user of ID " + userId;
-			throw new UserNotFoundException(HttpStatus.NOT_FOUND, err);
+			throw new UserNotFoundException(err);
 		}
 		
 		return user;
@@ -164,7 +163,7 @@ public class UserServiceImpl implements UserService {
 		} catch(NoSuchElementException e) {
 			
 			String err = "UserService update method failed to find user of ID " + id;
-			throw new UserNotFoundException(HttpStatus.NOT_FOUND, err);
+			throw new UserNotFoundException(err);
 		}
 		
 		if(user != null) {

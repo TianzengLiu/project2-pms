@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.champions.exceptions.PermitNotFoundException;
@@ -40,7 +39,7 @@ public class PermitServiceImpl implements PermitService {
 		} catch(NoSuchElementException e) {
 			
 			String err = "PermitService failed to find permit of ID " + id;
-			throw new PermitNotFoundException(HttpStatus.NOT_FOUND, err);
+			throw new PermitNotFoundException(err);
 		}
 		
 		return permit;
@@ -54,7 +53,7 @@ public class PermitServiceImpl implements PermitService {
 		if(permits.isEmpty()) {
 			
 			String err = "PermitService found no permits for parking spot " + parkingSpot;
-			throw new PermitNotFoundException(HttpStatus.NOT_FOUND, err);
+			throw new PermitNotFoundException(err);
 		}
 		
 		return permits;
@@ -68,7 +67,7 @@ public class PermitServiceImpl implements PermitService {
 		if(permits.isEmpty()) {
 			
 			String err = "PermitService found no permits for license " + vehicleLicense;
-			throw new PermitNotFoundException(HttpStatus.NOT_FOUND, err);
+			throw new PermitNotFoundException(err);
 		}
 		
 		return permits;
@@ -98,7 +97,7 @@ public class PermitServiceImpl implements PermitService {
 		} catch(NoSuchElementException e) {
 					
 			String err = "PermitService update method failed to find permit of ID " + id;
-			throw new PermitNotFoundException(HttpStatus.NOT_FOUND, err);
+			throw new PermitNotFoundException(err);
 		}
 				
 		if(permit != null) {
