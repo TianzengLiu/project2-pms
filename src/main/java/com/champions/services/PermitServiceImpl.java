@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.champions.exceptions.PermitNotFoundException;
 import com.champions.models.Permit;
-import com.champions.models.User;
 import com.champions.repositories.PermitDao;
 
 @Service

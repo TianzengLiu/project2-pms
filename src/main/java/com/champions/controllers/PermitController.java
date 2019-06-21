@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.champions.models.Permit;
-import com.champions.models.User;
 import com.champions.services.PermitService;
 
 @RestController
