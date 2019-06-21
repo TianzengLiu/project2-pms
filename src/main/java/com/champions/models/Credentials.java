@@ -1,6 +1,5 @@
 package com.champions.models;
 
-
 public class Credentials {
 	
 	private String username;

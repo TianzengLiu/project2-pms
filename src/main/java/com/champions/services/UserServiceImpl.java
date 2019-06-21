@@ -15,6 +15,7 @@ import com.champions.models.Permit;
 import com.champions.models.Role;
 import com.champions.models.User;
 import com.champions.repositories.UserDao;
+import com.champions.models.Credentials;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -29,6 +30,12 @@ public class UserServiceImpl implements UserService {
 		this.userDao = ud;
 		this.roleService = rs;
 		this.permitService = ps;
+	}
+	
+	@Override
+	public User login(Credentials cred) {
+		// TODO Auto-generated method stub
+		return userDao.findByUsernameAndPassword(cred.getUsername(), cred.getPassword());
 	}
 	
 	@Override

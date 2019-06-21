@@ -2,6 +2,8 @@ package com.champions.controllers;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.champions.annotations.Authen;
 import com.champions.models.NewUser;
 import com.champions.models.User;
 import com.champions.services.UserService;
+import com.champions.models.Credentials;
 
 @RestController
 @RequestMapping("user")
@@ -37,6 +41,7 @@ public class UserController {
 		this.userService = userService;
 	}
 	
+	@Authen(roles = { "manager"})
 	@GetMapping
 	public List<User> findAll() {
 		
@@ -59,6 +64,15 @@ public class UserController {
 	public User saveUser(@Valid @RequestBody NewUser newUser) {
 		
 		return userService.save(newUser);
+	}
+	
+	@PostMapping("login")
+	public User login(@RequestBody Credentials cred, HttpServletRequest req) {
+		User user = userService.login(cred);
+		req.getSession().setAttribute("user", user);
+		
+		return user;
+		
 	}
 	
 	@DeleteMapping("{id}")
