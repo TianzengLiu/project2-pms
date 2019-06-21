@@ -28,7 +28,6 @@ public class UserController {
 	
 	public UserController() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Autowired
@@ -55,19 +54,29 @@ public class UserController {
 		return userService.findById(userId);
 	}
 	
+	/**
+	 * Receives information necessary to create a new User via the NewUser model
+	 * @param newUser
+	 * 			Contains all necessary and required information to construct a new User
+	 * @return
+	 * 			The User object that is created and saved to the database
+	 */
 	@PostMapping
 	public User saveUser(@Valid @RequestBody NewUser newUser) {
 		
 		return userService.save(newUser);
 	}
 	
-	@DeleteMapping("{id}")
-	public ResponseEntity<?> delete(@PathVariable String id) {
-		
-		userService.delete(Integer.parseInt(id));
-		return ResponseEntity.ok("User of id " + id + " deleted");
-	}
-	
+	/**
+	 * Partial update PATCH endpoint allows patching only the fields provided in an
+	 * arbitrary JSON object and ignoring irrelevant keys
+	 * @param updates
+	 * 			JSON object containing fields and their values to apply to a User
+	 * @param id
+	 * 			The ID of the User to update
+	 * @return
+	 * 			The updated User object
+	 */
 	@RequestMapping(value = "{id}", 
 					method = RequestMethod.PATCH, 
 					consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -77,5 +86,10 @@ public class UserController {
 	    return userService.update(updates, Integer.parseInt(id));
 	}
 
-
+	@DeleteMapping("{id}")
+	public ResponseEntity<?> delete(@PathVariable String id) {
+		
+		userService.delete(Integer.parseInt(id));
+		return ResponseEntity.ok("User of id " + id + " deleted");
+	}
 }

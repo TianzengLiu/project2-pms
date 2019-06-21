@@ -69,12 +69,15 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	// Save method currently only used internally to save a valid User object	 
 	@Override
 	public User save(User user) {
 		
 		return userDao.save(user);
 	}
-	
+
+	// Unused series of methods to construct a user from an arbitrary
+	// JSON object, with manual validation of required fields.	 
 	@Override
 	public User save(Map<String, Object> newUser) {
 		
@@ -117,6 +120,9 @@ public class UserServiceImpl implements UserService {
 		return new User(0, username, password, first, last, email, address, role, null);
 	}
 	
+	
+	// The save method used by the user save endpoint to 
+	// convert a NewUser into a valid User and store it 
 	@Override
 	public User save(NewUser newUser) {
 		
@@ -146,12 +152,10 @@ public class UserServiceImpl implements UserService {
 		userDao.deleteById(id);
 	}
 	
+	// Extracts appropriate updates from a map and applies them to User of id
 	@Override
 	public User update(Map<String, Object> updates, int id) {
-		
-		// test output
-		//updates.forEach((s, o) -> {System.out.println(s + " " + o + " " + o.getClass());});
-		
+				
 		User user = null;
 		
 		try {
@@ -173,6 +177,7 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 	
+	// Fills field denoted by String s on User s with appropriately cast Object o
 	private void fillUser(User usr, String s, Object o) {
 		
 		switch(s) {
