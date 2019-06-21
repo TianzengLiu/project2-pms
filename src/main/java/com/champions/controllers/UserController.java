@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.champions.models.NewUser;
 import com.champions.models.User;
 import com.champions.services.UserService;
 
@@ -56,8 +57,8 @@ public class UserController {
 		return userService.findById(userId);
 	}
 	
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-	public User saveUser(@RequestBody Map<String, Object> newUser) {
+	@PostMapping
+	public User saveUser(@Valid @RequestBody NewUser newUser) {
 		
 		return userService.save(newUser);
 	}

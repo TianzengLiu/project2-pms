@@ -2,8 +2,7 @@ package com.champions.services;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-
+import com.champions.models.NewUser;
 import com.champions.models.User;
 
 public interface UserService {
@@ -13,6 +12,8 @@ public interface UserService {
 	public User findByUsername(String username);
 	
 	public User save(Map<String, Object> user);
+	
+	public User save(NewUser newUser);
 	
 	public User save(User user);
 	

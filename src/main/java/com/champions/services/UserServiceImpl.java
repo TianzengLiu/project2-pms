@@ -117,6 +117,15 @@ public class UserServiceImpl implements UserService {
 		return new User(0, username, password, first, last, email, address, role, null);
 	}
 	
+	@Override
+	public User save(NewUser newUser) {
+		
+		User user = newUserIntoUser(newUser);
+		userDao.save(user);
+
+		return user;
+	}
+	
 	private User newUserIntoUser(NewUser newUser) {
 		
 		String username = newUser.getUsername();
