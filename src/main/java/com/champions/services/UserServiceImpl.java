@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.champions.exceptions.UserNotFoundException;
+import com.champions.models.NewUser;
 import com.champions.models.Permit;
 import com.champions.models.Role;
 import com.champions.models.User;
@@ -112,6 +113,20 @@ public class UserServiceImpl implements UserService {
 		String address = (String)newUser.get("address");
 		
 		Role role = roleService.findById((Integer)newUser.get("roleId"));
+		
+		return new User(0, username, password, first, last, email, address, role, null);
+	}
+	
+	private User newUserIntoUser(NewUser newUser) {
+		
+		String username = newUser.getUsername();
+		String password = newUser.getPassword();
+		String first = newUser.getFirstName();
+		String last = newUser.getLastName();
+		String email = newUser.getEmail();
+		String address = newUser.getAddress();
+		
+		Role role = roleService.findById(newUser.getRoleId());
 		
 		return new User(0, username, password, first, last, email, address, role, null);
 	}

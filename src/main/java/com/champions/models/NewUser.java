@@ -1,28 +1,9 @@
 package com.champions.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+public class NewUser {
 
-@Entity
-@Table(name="users")
-public class User {
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="user_id")
-	private int userId;
-	
 	private String username;
 	
-	@Column(name="passwd")
 	private String password;
 	
 	private String firstName;
@@ -33,39 +14,23 @@ public class User {
 	
 	private String address;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="role_id", referencedColumnName="role_id")
-	private Role role;
-	
-	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="permit_id", referencedColumnName="permit_id", nullable=true)
-	private Permit permit;
+	private int roleId;
 
-	public User() {
+	public NewUser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userId, String username, String password, String firstName, String lastName, String email,
-			String address, Role role, Permit permit) {
+	public NewUser(String username, String password, String firstName, String lastName, String email, String address,
+			int roleId) {
 		super();
-		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.address = address;
-		this.role = role;
-		this.permit = permit;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
+		this.roleId = roleId;
 	}
 
 	public String getUsername() {
@@ -116,27 +81,18 @@ public class User {
 		this.address = address;
 	}
 
-	public Role getRole() {
-		return role;
+	public int getRoleId() {
+		return roleId;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-	public Permit getPermit() {
-		return permit;
-	}
-
-	public void setPermit(Permit permit) {
-		this.permit = permit;
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", email=" + email + ", address=" + address + ", role=" + role
-				+ ", permit=" + permit + "]";
+		return "NewUser [username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", email=" + email + ", address=" + address + ", roleId=" + roleId + "]";
 	}
 
 	@Override
@@ -148,9 +104,7 @@ public class User {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((permit == null) ? 0 : permit.hashCode());
-		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		result = prime * result + userId;
+		result = prime * result + roleId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -163,7 +117,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		NewUser other = (NewUser) obj;
 		if (address == null) {
 			if (other.address != null)
 				return false;
@@ -189,17 +143,7 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (permit == null) {
-			if (other.permit != null)
-				return false;
-		} else if (!permit.equals(other.permit))
-			return false;
-		if (role == null) {
-			if (other.role != null)
-				return false;
-		} else if (!role.equals(other.role))
-			return false;
-		if (userId != other.userId)
+		if (roleId != other.roleId)
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -208,4 +152,5 @@ public class User {
 			return false;
 		return true;
 	}
+	
 }
