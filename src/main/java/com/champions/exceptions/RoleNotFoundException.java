@@ -1,18 +1,11 @@
 package com.champions.exceptions;
 
-import org.springframework.http.HttpStatus;
+public class RoleNotFoundException extends NotFoundException {
 
-public class RoleNotFoundException extends AbstractApiException {
+	private static final long serialVersionUID = 1L;
 
-	public RoleNotFoundException(HttpStatus hs) {
-		super(hs);
-		// TODO Auto-generated constructor stub
+	public RoleNotFoundException(String ms) {
+		
+		super(ms);
 	}
-	
-	public RoleNotFoundException(HttpStatus hs, String message) {
-		super(hs, message);
-		// TODO Auto-generated constructor stub
-	}
-	
-
 }

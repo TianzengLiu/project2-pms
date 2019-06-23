@@ -1,18 +1,11 @@
 package com.champions.exceptions;
 
-import org.springframework.http.HttpStatus;
+public class PermitNotFoundException extends NotFoundException {
 
-public class PermitNotFoundException extends AbstractApiException {
+	private static final long serialVersionUID = 1L;
 
-	public PermitNotFoundException(HttpStatus hs) {
-		super(hs);
-		// TODO Auto-generated constructor stub
+	public PermitNotFoundException(String ms) {
+		
+		super(ms);
 	}
-	
-	public PermitNotFoundException(HttpStatus hs, String message) {
-		super(hs, message);
-		// TODO Auto-generated constructor stub
-	}
-	
-
 }

@@ -10,9 +10,10 @@
 	</parent>
 	<groupId>com.champions</groupId>
 	<artifactId>project2-pms</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>project2-pms</name>
-	<description>Project 2 parking management system</description>
+	<description>Project 2 Parking Management System</description>
+	<packaging>jar</packaging>
 
 	<properties>
 		<java.version>1.8</java.version>

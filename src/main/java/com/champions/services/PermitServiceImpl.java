@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.champions.exceptions.PermitNotFoundException;
@@ -40,7 +39,7 @@ public class PermitServiceImpl implements PermitService {
 		} catch(NoSuchElementException e) {
 			
 			String err = "PermitService failed to find permit of ID " + id;
-			throw new PermitNotFoundException(HttpStatus.NOT_FOUND, err);
+			throw new PermitNotFoundException(err);
 		}
 		
 		return permit;
@@ -54,7 +53,7 @@ public class PermitServiceImpl implements PermitService {
 		if(permits.isEmpty()) {
 			
 			String err = "PermitService found no permits for parking spot " + parkingSpot;
-			throw new PermitNotFoundException(HttpStatus.NOT_FOUND, err);
+			throw new PermitNotFoundException(err);
 		}
 		
 		return permits;
@@ -68,7 +67,7 @@ public class PermitServiceImpl implements PermitService {
 		if(permits.isEmpty()) {
 			
 			String err = "PermitService found no permits for license " + vehicleLicense;
-			throw new PermitNotFoundException(HttpStatus.NOT_FOUND, err);
+			throw new PermitNotFoundException(err);
 		}
 		
 		return permits;
@@ -86,11 +85,9 @@ public class PermitServiceImpl implements PermitService {
 		permitDao.deleteById(id);
 	}
 
+	// Extracts appropriate updates from a map and applies them to Permit of id
 	@Override
 	public Permit update(Map<String, Object> updates, int id) {
-		
-		// test output
-		//updates.forEach((s, o) -> {System.out.println(s + " " + o + " " + o.getClass());});
 				
 		Permit permit = null;
 				
@@ -100,11 +97,12 @@ public class PermitServiceImpl implements PermitService {
 		} catch(NoSuchElementException e) {
 					
 			String err = "PermitService update method failed to find permit of ID " + id;
-			throw new PermitNotFoundException(HttpStatus.NOT_FOUND, err);
+			throw new PermitNotFoundException(err);
 		}
 				
 		if(permit != null) {
 					
+			// must be final for capture in fillPermit lambda
 			final Permit finalPermit = permit;
 			updates.forEach((s, o) -> {fillPermit(finalPermit, s, o);});
 			save(permit);
@@ -112,7 +110,8 @@ public class PermitServiceImpl implements PermitService {
 				
 		return permit;
 	}
-	
+
+	// Fills field denoted by String s on Permit p with appropriately cast Object o
 	private void fillPermit(Permit p, String s, Object o) {
 		
 		switch(s) {

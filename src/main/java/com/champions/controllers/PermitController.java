@@ -29,7 +29,6 @@ public class PermitController {
 
 	public PermitController() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Autowired
@@ -73,6 +72,16 @@ public class PermitController {
 		return ResponseEntity.ok("Permit of id " + id + " deleted");
 	}
 	
+	/**
+	 * Partial update PATCH endpoint allows patching only the fields provided in an
+	 * arbitrary JSON object and ignoring irrelevant keys
+	 * @param updates
+	 * 			JSON object containing fields and their values to apply to a Permit
+	 * @param id
+	 * 			The ID of the Permit to update
+	 * @return
+	 * 			The updated Permit object
+	 */
 	@Authen(roles = {"manager"})
 	@RequestMapping(value = "{id}", 
 					method = RequestMethod.PATCH, 
