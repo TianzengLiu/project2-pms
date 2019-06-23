@@ -41,19 +41,21 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	@Authen(roles = { "manager"})
+	@Authen(roles = {"manager"})
 	@GetMapping
 	public List<User> findAll() {
 		
 		return userService.findAll();
 	}
 	
+	@Authen(roles = {"manager"})
 	@GetMapping("username/{username}")
 	public User findByUsername(@PathVariable String username) {
 		
 		return userService.findByUsername(username);
 	}
 	
+	@Authen(roles = {"manager"})
 	@GetMapping("userId/{userId}")
 	public User findById(@PathVariable int userId) {
 		
@@ -66,15 +68,16 @@ public class UserController {
 		return userService.save(newUser);
 	}
 	
-	@PostMapping("login")
-	public User login(@RequestBody Credentials cred, HttpServletRequest req) {
-		User user = userService.login(cred);
-		req.getSession().setAttribute("user", user);
-		
-		return user;
-		
-	}
+//	@PostMapping("login")
+//	public User login(@RequestBody Credentials cred, HttpServletRequest req) {
+//		User user = userService.login(cred);
+//		req.getSession().setAttribute("user", user);
+//		
+//		return user;
+//		
+//	}
 	
+	@Authen(roles = {"manager"})
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> delete(@PathVariable String id) {
 		
@@ -82,6 +85,7 @@ public class UserController {
 		return ResponseEntity.ok("User of id " + id + " deleted");
 	}
 	
+	@Authen(roles = {"manager"})
 	@RequestMapping(value = "{id}", 
 					method = RequestMethod.PATCH, 
 					consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.champions.annotations.Authen;
 import com.champions.models.Permit;
 import com.champions.services.PermitService;
 
@@ -37,18 +38,21 @@ public class PermitController {
 		this.permitService = permitService;
 	}
 	
+	@Authen(roles = {"manager"})
 	@GetMapping
 	public List<Permit> findAll() {
 		
 		return permitService.findAll();
 	}
 	
+	@Authen(roles = {"manager"})
 	@GetMapping("spot/{spot}")
 	public List<Permit> findByParkingSpot(@PathVariable String spot) {
 		
 		return permitService.findByParkingSpot(spot);
 	}
 	
+	@Authen(roles = {"manager"})
 	@GetMapping("license/{license}")
 	public List<Permit> findByVehicleLicense(@PathVariable String license) {
 		
@@ -61,6 +65,7 @@ public class PermitController {
 		return permitService.save(permit);
 	}
 	
+	@Authen(roles = {"manager"})
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> delete(@PathVariable String id) {
 		
@@ -68,6 +73,7 @@ public class PermitController {
 		return ResponseEntity.ok("Permit of id " + id + " deleted");
 	}
 	
+	@Authen(roles = {"manager"})
 	@RequestMapping(value = "{id}", 
 					method = RequestMethod.PATCH, 
 					consumes = MediaType.APPLICATION_JSON_VALUE)
