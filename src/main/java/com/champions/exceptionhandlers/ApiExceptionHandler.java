@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.champions.exceptions.PermitNotFoundException;
 import com.champions.exceptions.RoleNotFoundException;
+import com.champions.exceptions.UnauthorizedException;
 import com.champions.exceptions.UserNotFoundException;
 
 @ControllerAdvice
@@ -28,6 +29,13 @@ public class ApiExceptionHandler {
 	
 	@ExceptionHandler(value = {RoleNotFoundException.class})
 	public ResponseEntity<Object> roleNotFound(RoleNotFoundException e) {
+		
+		System.out.println(e);
+		return new ResponseEntity<Object>(e.getMessage(), e.getStatus());
+	}
+	
+	@ExceptionHandler(value = {UnauthorizedException.class})
+	public ResponseEntity<Object> unauthorized(UnauthorizedException e) {
 		
 		System.out.println(e);
 		return new ResponseEntity<Object>(e.getMessage(), e.getStatus());

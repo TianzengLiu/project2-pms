@@ -29,14 +29,14 @@ public class AuthAspect {
 		User currentUser = lg.getLoggedInUser();
 		System.out.println(currentUser);
 		if(currentUser == null) {
-			throw new UnauthorizedException(HttpStatus.FORBIDDEN, "You are unauthorized for this end point");
+			throw new UnauthorizedException();
 		} else {
 			for(String role : auth.roles()) {
 				if(currentUser.getRole().getRoleName().equals(role) ) {
 					return pjp.proceed();
 				}
 			}
-			throw new UnauthorizedException(HttpStatus.FORBIDDEN, "You are unauthorized for this end point");
+			throw new UnauthorizedException();
 		}
 	}
 		
